@@ -1,16 +1,23 @@
+<div class="row">
+    <div class="col-sm-1">
+        <a href="/product" class="btn btn-default">New Product</a>
+    </div>
+</div>
 <table class="table">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Price</th>
+        <th style="text-align: left">Name</th>
+        <th style="text-align: center">Price</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-    </tr>
-
+        <tr ng-repeat="product in products">
+            <td style="text-align: left">{{product.name}}</td>
+            <td style="text-align: center">{{product.price}}</td>
+            <td style="text-align: right">
+                <a ng-click="onEdit(product.id)" class="btn btn-default">Edit</a>
+                <a ng-click="onRemove(product.id)" class="btn btn-default">Delete</a>
+            </td>
+        </tr>
     </tbody>
 </table>

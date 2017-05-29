@@ -1,0 +1,70 @@
+<h1>Invoice Details</h1>
+<form name="invoiceForm" novalidate>
+    <p>Customer:<br>
+        <h3>{{viewCustomer["name"]}}</h3>
+    </p>
+
+    <p>Discount:<br>
+        <input type="number" style="border: none" name="discount" ng-model="invoice.discount" min=0 max=100
+               ng-blur="updateTotal(invoice.id)" required>
+        <span style="color:red" ng-show="invoiceForm.discount.$dirty && invoiceForm.discount.$invalid">
+            <span ng-show="invoiceForm.discount.$error.required">Discount is required.</span>
+            <span ng-show="invoiceForm.discount.$invalid">Expected number from 1 to 100.</span>
+        </span>
+    </p>
+    <p>Total:<br>
+        <h3>{{invoice.total}}</h3>
+    </p>
+</form>
+
+<h1>Select new customer</h1>
+<select name="repeatSelect" id="repeatSelect" ng-model="customerSelection.model">
+    <option ng-repeat="customer in customerSelection.availableOptions" value="{{customer.id}}" >{{customer.name}}</option>
+</select>
+
+
+<h1>Select product</h1>
+
+<div class="row">
+    <div class="col-sm-3">
+        <select name="productSelect" id="productSelect" ng-model="productSelection.model">
+            <option ng-repeat="product in productSelection.availableOptions" value="{{product.id}}">{{product.name}}</option>
+        </select>
+    </div>
+
+    <div class="col-sm-2">
+        <a ng-click="onAddNewItem()" class="btn btn-default">Add product</a>
+    </div>
+    <div class="col-sm-2">
+        <a ng-click="createProduct()" class="btn btn-default">Create product</a>
+    </div>
+    <div class="col-sm-2">
+        <a ng-click="createCustomer()" class="btn btn-default">Create customer</a>
+    </div>
+    <div class="col-sm-2">
+        <a ng-click ="onExit()" class ="btn btn-default">Back to invoices</a>
+    </div>
+</div>
+
+<h1>Products in invoice</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th style="text-align: left">Product</th>
+        <th style="text-align: center">Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in viewItems">
+        <td style="text-align: left">{{item.name}}</td>
+        <td style="text-align: center">
+            <input type="number" style="border: none" name="discount" ng-model="item.quantity"
+                   ng-blur="updateItem(item.id, item.product_id, item.quantity)" required>
+        </td>
+        <td style="text-align: right">
+            <a ng-click="onRemoveItem(item.id)" class="btn btn-default">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>

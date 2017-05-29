@@ -1,0 +1,28 @@
+<form
+      name="productForm" novalidate>
+
+    <p>Name:<br>
+        <input type="text" name="name" ng-model="product.name" required>
+        <span style="color:red" ng-show="productForm.name.$dirty && productForm.name.$invalid">
+            <span ng-show="productForm.name.$error.required">Name is required.</span>
+        </span>
+    </p>
+
+    <p>Price:<br>
+        <input type="number" name="price" ng-model="product.price" required>
+        <span style="color:red" ng-show="productForm.price.$dirty && productForm.price.$invalid">
+            <span ng-show="productForm.price.$error.required">Price is required.</span>
+            <span ng-show="productForm.price.$invalid">Number expected.</span>
+        </span>
+    </p>
+    <div class="row">
+        <div class="col-sm-1">
+            <a ng-click="onSubmit()" ng-disabled="productForm.name.$dirty && productForm.name.$invalid ||
+            productForm.price.$dirty && productForm.price.$invalid" class="btn btn-default" >Submit</a>
+        </div>
+        <div class="col-sm-1">
+            <a ng-click="onCancel()" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,36 @@
+<form
+        name="customerForm" novalidate>
+
+    <p>Name:<br>
+        <input type="text" name="name" ng-model="customer.name" required>
+        <span style="color:red" ng-show="customerForm.name.$dirty && customerForm.name.$invalid">
+            <span ng-show="customerForm.name.$error.required">Name is required.</span>
+        </span>
+    </p>
+
+    <p>Phone:<br>
+        <input type="text" name="phone" ng-model="customer.phone"
+               ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" required>
+        <span style="color:red" ng-show="customerForm.phone.$dirty&&customerForm.phone.$invalid">
+            <span ng-show="customerForm.phone.$error.required">Phone number is required.</span>
+            <span ng-show="customerForm.phone.$error.pattern">Valid phone number pattern: ***-***-****</span>
+        </span>
+    </p>
+    <p>Address:<br>
+        <input type="text" name="address" ng-model="customer.address" required>
+        <span style="color:red" ng-show="customerForm.address.$dirty && customerForm.address.$invalid">
+            <span ng-show="customerForm.address.$error.required">Address is required.</span>
+        </span>
+    </p>
+    <div class="row">
+        <div class="col-sm-1">
+            <a ng-click="onSubmit()" ng-disabled="customerForm.name.$dirty && customerForm.name.$invalid
+            || customerForm.phone.$invalid || customerForm.address.$invalid && customerForm.address.$dirty"
+               class="btn btn-default" >Submit</a>
+        </div>
+        <div class="col-sm-1">
+            <a ng-click="onCancel()" class="btn btn-default">Cancel</a>
+        </div>
+    </div>
+
+</form>
